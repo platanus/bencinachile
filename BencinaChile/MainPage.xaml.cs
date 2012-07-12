@@ -9,17 +9,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using System.Device.Location;
-using Microsoft.Phone.Reactive;
-using AgFx;
 using System.Windows.Data;
-using AgFx.Controls;
+using System.Device.Location;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Reactive;
+using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Shell;
+using AgFx;
+using AgFx.Controls;
 
 using BencinaChile.GeoCodeService;
-using Microsoft.Phone.Tasks;
 
 namespace BencinaChile
 {
@@ -138,7 +138,7 @@ namespace BencinaChile
             }
         }
 
-        private void open_bing_maps(object sender, GestureEventArgs e)
+        private void open_bing_maps(object sender, System.Windows.Input.GestureEventArgs e)
         {
             if (selectedStation == null) return;
             
