@@ -19,7 +19,10 @@ namespace BencinaChile
     public class Station
     {
         private GeoCoordinate _location;
-        
+
+        [JsonProperty(PropertyName = "id")]
+        public int StationId { get; set; }
+
         [JsonProperty(PropertyName = "brand_name")]
         public string BrandName { get; set; }
 
@@ -51,6 +54,14 @@ namespace BencinaChile
 
                 return _location;
             }
+        }
+
+        public int Distance { get; set; }
+
+        public int SetDistanceFrom(GeoCoordinate _startLocation) 
+        {
+            Distance = Convert.ToInt32(_startLocation.GetDistanceTo(Location));
+            return Distance;
         }
     }
 }

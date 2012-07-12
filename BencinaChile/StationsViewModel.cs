@@ -12,6 +12,7 @@ using AgFx;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Device.Location;
 
 namespace BencinaChile
 {
@@ -61,6 +62,7 @@ namespace BencinaChile
                 foreach (var item in jarray.Items)
                 {
                     item.PositionId = i;
+                    item.SetDistanceFrom(new GeoCoordinate(loadContext.Latitude, loadContext.Longitude));
                     vm.Stations.Add(item);
                     i++;
                 }
