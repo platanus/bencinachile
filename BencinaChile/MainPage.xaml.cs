@@ -50,8 +50,10 @@ namespace BencinaChile
             if (gcw == null)
                 gcw = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
-
             gcw.Start();
+
+            GlobalLoading.Instance.IsLoading = true;
+            GlobalLoading.Instance.SetText("Buscando ubicación...");
 
             gcw.StatusChanged += (sender, ev) =>
             {
@@ -59,6 +61,10 @@ namespace BencinaChile
                 {
                     // Stop the gps
                     gcw.Stop();
+
+                    GlobalLoading.Instance.IsLoading = false;
+                    GlobalLoading.Instance.SetText("");
+
 
                     var loadContext = new LocationLoadContext(DateTime.Now.Ticks.ToString());
                     loadContext.Latitude = gcw.Position.Location.Latitude;
@@ -90,23 +96,23 @@ namespace BencinaChile
                     
 
                     this.DataContext = DataManager.Current.Load<StationsViewModel>(loadContext,
-                    (vm) =>
-                    {
-                        stationViewModel = vm;
+                        (vm) =>
+                        {
+                            stationViewModel = vm;
                         
-                        foreach(var station in stationViewModel.Stations){
-                            var pushpin = new Pushpin();
-                            pushpin.Location = station.Location;
-                            pushpin.Content = station.PositionId;
-                            station.PushPin = pushpin;
-                            map1.Children.Add(pushpin);
+                            foreach(var station in stationViewModel.Stations){
+                                var pushpin = new Pushpin();
+                                pushpin.Location = station.Location;
+                                pushpin.Content = station.PositionId;
+                                station.PushPin = pushpin;
+                                map1.Children.Add(pushpin);
+                            }
+                        },
+                        (ex) =>
+                        {
+                            MessageBox.Show("Failed to get data for ");
                         }
-                    },
-                    (ex) =>
-                    {
-                        MessageBox.Show("Failed to get data for ");
-                    }
-             );
+                    );
                 }
             };
         }

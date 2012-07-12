@@ -18,7 +18,7 @@ namespace BencinaChile
         public double Longitude { get; set; }
 
 
-        public string Week {
+        public string ComputedAddress {
             get {
                 return (string)Identity;
             }            

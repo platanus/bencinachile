@@ -119,5 +119,10 @@ namespace BencinaChile
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public void SetText(string _text) 
+        {
+            _mangoIndicator.Text = _text;
+        }
     }
 }
