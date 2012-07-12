@@ -25,9 +25,13 @@ namespace BencinaChile
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        // The GPS object
         GeoCoordinateWatcher gcw;
+
+        // The geocode object
         GeocodeServiceClient geocodeService = null;
 
+        // Local properties for global access
         GeoCoordinate currentLocation;
         Station selectedStation;
         StationsViewModel stationViewModel;
@@ -37,7 +41,10 @@ namespace BencinaChile
         {
             InitializeComponent();
 
+            // Start the map
             map1.Mode = new RoadMode();
+
+            // TODO: Start map centered at the last location
 
         }
 
@@ -45,45 +52,40 @@ namespace BencinaChile
         {
             base.OnNavigatedTo(e);
 
+            // Don't do anything if we already have the data
             if (stationViewModel != null) return;
             
+            // Prevent the creation of another watcher
             if (gcw == null)
                 gcw = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
+            // Start the GPS
             gcw.Start();
 
+            // Set the loading in with a GPS message
             GlobalLoading.Instance.IsLoading = true;
             GlobalLoading.Instance.SetText("Buscando ubicación...");
 
             gcw.StatusChanged += (sender, ev) =>
             {
+                // We've got a location from the gps
                 if (ev.Status == GeoPositionStatus.Ready)
                 {
                     // Stop the gps
                     gcw.Stop();
 
+                    // Set the loading of when the gps is ready
                     GlobalLoading.Instance.IsLoading = false;
                     GlobalLoading.Instance.SetText("");
 
+                    // Save the current location for later usage
+                    currentLocation = new GeoCoordinate(gcw.Position.Location.Latitude, gcw.Position.Location.Longitude);
 
                     var loadContext = new LocationLoadContext(DateTime.Now.Ticks.ToString());
-                    loadContext.Latitude = gcw.Position.Location.Latitude;
-                    loadContext.Longitude = gcw.Position.Location.Longitude;
+                    loadContext.Latitude = currentLocation.Latitude;
+                    loadContext.Longitude = currentLocation.Longitude;
 
-                    currentLocation = new GeoCoordinate(gcw.Position.Location.Latitude, gcw.Position.Location.Longitude);
-                    map1.SetView(currentLocation, 15);
-                    map1.Children.Add(new Pushpin() {
-                        Location = currentLocation,
-                        Content = "Tú",
-                        Background = App.Current.Resources["PhoneAccentBrush"] as SolidColorBrush
-                    });
-
-                    geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
-                    geocodeService.ReverseGeocodeCompleted += (sen, evarg) =>
-                    {
-                        address.Text = String.Format("{0}, {1}", evarg.Result.Results[0].Address.Locality, evarg.Result.Results[0].Address.AdminDistrict).ToUpper();
-                    };
-
+                    // Try to get and address reference to the location
                     ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest();
 
                     // Set the credentials using a valid Bing Maps key
@@ -92,9 +94,23 @@ namespace BencinaChile
 
                     reverseGeocodeRequest.Location = currentLocation;
 
+                    geocodeService = new GeocodeServiceClient("BasicHttpBinding_IGeocodeService");
+                    geocodeService.ReverseGeocodeCompleted += (sen, evarg) =>
+                    {
+                        // The the address location in the address control
+                        address.Text = String.Format("{0}, {1}", evarg.Result.Results[0].Address.Locality, evarg.Result.Results[0].Address.AdminDistrict).ToUpper();
+                    };
                     geocodeService.ReverseGeocodeAsync(reverseGeocodeRequest);
                     
+                    // Center the map and add a pushpin in my current location
+                    map1.SetView(currentLocation, 15);
+                    map1.Children.Add(new Pushpin() {
+                        Location = currentLocation,
+                        Content = "Tú",
+                        Background = App.Current.Resources["PhoneAccentBrush"] as SolidColorBrush
+                    });                   
 
+                    // Load data context from bencinas.satelinx api
                     this.DataContext = DataManager.Current.Load<StationsViewModel>(loadContext,
                         (vm) =>
                         {
