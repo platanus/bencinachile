@@ -172,7 +172,7 @@ namespace BencinaChile
 
             // If you set the geocoordinate parameter to null, the label parameter is used as a search term.
             LabeledMapLocation startSpaceNeedleLML = new LabeledMapLocation("Tu", currentLocation);
-            LabeledMapLocation endSpaceNeedleLML = new LabeledMapLocation("Colon 345, las condes",selectedStation.Location);
+            LabeledMapLocation endSpaceNeedleLML = new LabeledMapLocation(selectedStation.Address, selectedStation.Location);
 
             bingMapsDirectionsTask.Start = startSpaceNeedleLML;
             bingMapsDirectionsTask.End = endSpaceNeedleLML;
