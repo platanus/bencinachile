@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using AgFx.Controls;
 
 namespace BencinaChile
 {
@@ -21,7 +22,7 @@ namespace BencinaChile
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
-        public PhoneApplicationFrame RootFrame { get; private set; }
+        public PhoneApplicationFrameEx RootFrame { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -116,7 +117,7 @@ namespace BencinaChile
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new PhoneApplicationFrameEx();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
@@ -124,6 +125,8 @@ namespace BencinaChile
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
+
+            GlobalLoading.Instance.Initialize(RootFrame);
         }
 
         // Do not add any additional code to this method

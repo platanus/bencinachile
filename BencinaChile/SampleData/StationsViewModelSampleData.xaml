@@ -1,0 +1,187 @@
+﻿<BencinaChile:StationsViewModel xmlns:BencinaChile="clr-namespace:BencinaChile" xmlns:System_Device_Location="clr-namespace:System.Device.Location;assembly=System.Device" xmlns:Microsoft_Phone_Controls_Maps="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" IsUpdating="True" LastUpdated="07/11/2012 00:14:32">
+	<BencinaChile:StationsViewModel.LoadContext>
+		<BencinaChile:LocationLoadContext Longitude="434.21" Latitude="403.45" UniqueKey="Adipiscing parturient" Week="Euismod erat non"/>
+	</BencinaChile:StationsViewModel.LoadContext>
+	<BencinaChile:StationsViewModel.Stations>
+		<BencinaChile:Station Address="Maecenas nam class curabitur praesent" BrandId="78" BrandName="Cras" PositionId="56">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="781.3" Course="568.21" HorizontalAccuracy="854.12" IsUnknown="True" Longitude="178.72" Latitude="344.26" Speed="968.9" VerticalAccuracy="397.11"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="692.24" Course="601.43" HorizontalAccuracy="993.62" IsUnknown="False" Longitude="343.85" Latitude="462.14" Speed="819.42" VerticalAccuracy="620.2"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="523.17" Y="506.57"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Integer sed adipiscing mauris parturient" BrandId="85" BrandName="Aliquam" PositionId="34">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="563.47" Course="545.55" HorizontalAccuracy="263.88" IsUnknown="True" Longitude="204.53" Latitude="358.19" Speed="837.12" VerticalAccuracy="554.16"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="417.13" Course="891.15" HorizontalAccuracy="400.71" IsUnknown="False" Longitude="943.6" Latitude="118.9" Speed="423.04" VerticalAccuracy="178.89"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="461.1" Y="279.87"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Quisque duis" BrandId="17" BrandName="Nam" PositionId="96">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="679.2" Course="139.25" HorizontalAccuracy="263.45" IsUnknown="True" Longitude="116.2" Latitude="170.96" Speed="212.68" VerticalAccuracy="346.38"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="798.31" Course="811.99" HorizontalAccuracy="353.17" IsUnknown="False" Longitude="984.14" Latitude="431.33" Speed="160.06" VerticalAccuracy="938.1"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="203.69" Y="699.98"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Amet aliquet auctor" BrandId="39" BrandName="Aenean" PositionId="69">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="453.96" Course="807.67" HorizontalAccuracy="339.77" IsUnknown="True" Longitude="164.71" Latitude="542.6" Speed="363.26" VerticalAccuracy="676.76"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="731.08" Course="399.96" HorizontalAccuracy="927.13" IsUnknown="False" Longitude="668.19" Latitude="287.56" Speed="378.2" VerticalAccuracy="748.63"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="278.39" Y="914.73"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Curae phasellus commodo consequat" BrandId="60" BrandName="Duis" PositionId="99">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="101.03" Course="163.98" HorizontalAccuracy="240.22" IsUnknown="True" Longitude="359.71" Latitude="580.94" Speed="435.6" VerticalAccuracy="547.27"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="432.87" Course="917.49" HorizontalAccuracy="190.68" IsUnknown="False" Longitude="851.35" Latitude="546.2" Speed="505.79" VerticalAccuracy="570.01"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="357.06" Y="953.05"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Est convallis cursus" BrandId="46" BrandName="Maecenas" PositionId="34">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="297.02" Course="418.91" HorizontalAccuracy="589.63" IsUnknown="True" Longitude="839.12" Latitude="615.36" Speed="918.5" VerticalAccuracy="215.15"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="415.93" Course="462.48" HorizontalAccuracy="532.37" IsUnknown="False" Longitude="189.06" Latitude="770.99" Speed="925.11" VerticalAccuracy="678.19"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="520.1" Y="163.35"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Fusce facilisi lorem conubia morbi" BrandId="81" BrandName="Mauris" PositionId="62">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="174.78" Course="516.6" HorizontalAccuracy="983.11" IsUnknown="True" Longitude="797.88" Latitude="996.07" Speed="622.74" VerticalAccuracy="440.27"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="118.35" Course="360.39" HorizontalAccuracy="906.9" IsUnknown="False" Longitude="974.03" Latitude="625.1" Speed="817.06" VerticalAccuracy="825.4"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="325.29" Y="829.95"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Leo dignissim parturient" BrandId="52" BrandName="Nullam" PositionId="50">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="670.06" Course="334.51" HorizontalAccuracy="471.16" IsUnknown="True" Longitude="663.02" Latitude="959.29" Speed="175.61" VerticalAccuracy="182.53"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="948.82" Course="824.28" HorizontalAccuracy="218.46" IsUnknown="False" Longitude="664.6" Latitude="827.34" Speed="458.2" VerticalAccuracy="507.75"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="339.3" Y="670.57"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Vestibulum lectus mus elementum" BrandId="56" BrandName="Class" PositionId="54">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="482.85" Course="776.57" HorizontalAccuracy="989.18" IsUnknown="True" Longitude="360.99" Latitude="586.9" Speed="255.16" VerticalAccuracy="674.28"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="978.64" Course="571.27" HorizontalAccuracy="354.97" IsUnknown="False" Longitude="393.39" Latitude="932.21" Speed="241.12" VerticalAccuracy="598.87"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="637.07" Y="307.07"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+		<BencinaChile:Station Address="Elit fermentum" BrandId="26" BrandName="Integer" PositionId="88">
+			<BencinaChile:Station.Location>
+				<System_Device_Location:GeoCoordinate Altitude="941.04" Course="690.59" HorizontalAccuracy="307.02" IsUnknown="True" Longitude="904.35" Latitude="560.81" Speed="511.76" VerticalAccuracy="440.99"/>
+			</BencinaChile:Station.Location>
+			<BencinaChile:Station.Prices>
+				<BencinaChile:Prices/>
+			</BencinaChile:Station.Prices>
+			<BencinaChile:Station.PushPin>
+				<Microsoft_Phone_Controls_Maps:Pushpin>
+					<Microsoft_Phone_Controls_Maps:Pushpin.Location>
+						<System_Device_Location:GeoCoordinate Altitude="900.57" Course="147.24" HorizontalAccuracy="973.59" IsUnknown="False" Longitude="612.92" Latitude="504.27" Speed="453.74" VerticalAccuracy="902.19"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.Location>
+					<Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+						<Microsoft_Phone_Controls_Maps:PositionOrigin X="499.14" Y="385.8"/>
+					</Microsoft_Phone_Controls_Maps:Pushpin.PositionOrigin>
+				</Microsoft_Phone_Controls_Maps:Pushpin>
+			</BencinaChile:Station.PushPin>
+		</BencinaChile:Station>
+	</BencinaChile:StationsViewModel.Stations>
+</BencinaChile:StationsViewModel>
