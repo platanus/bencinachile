@@ -8,6 +8,7 @@
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" xmlns:my="clr-namespace:Microsoft.Phone.Controls.Maps;assembly=Microsoft.Phone.Controls.Maps" 
     xmlns:local="clr-namespace:BencinaChile"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:controlsPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls"
     x:Class="BencinaChile.MainPage"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -49,6 +50,36 @@
 				<Image Grid.Column="1" Margin="8,8,8,0" Source="/Icons/4.png" Height="25" VerticalAlignment="Top"/>
 			</Grid>
 		</DataTemplate>
+		<Style x:Key="PanoramaStyle1" TargetType="controls:Panorama">
+			<Setter Property="ItemsPanel">
+				<Setter.Value>
+					<ItemsPanelTemplate>
+						<controlsPrimitives:PanoramaPanel x:Name="panel"/>
+					</ItemsPanelTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Foreground" Value="{StaticResource PhoneForegroundBrush}"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="controls:Panorama">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="auto"/>
+								<RowDefinition Height="*"/>
+							</Grid.RowDefinitions>
+							<controlsPrimitives:PanningBackgroundLayer x:Name="BackgroundLayer" HorizontalAlignment="Left" Grid.RowSpan="2">
+								<Border x:Name="background" Background="{TemplateBinding Background}" CacheMode="BitmapCache"/>
+							</controlsPrimitives:PanningBackgroundLayer>
+							<controlsPrimitives:PanningTitleLayer x:Name="TitleLayer" CacheMode="BitmapCache" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" FontSize="187" FontFamily="{StaticResource PhoneFontFamilyLight}" HorizontalAlignment="Left" Margin="10,-76,0,9" Grid.Row="0" Height="0"/>
+							<controlsPrimitives:PanningLayer x:Name="ItemsLayer" HorizontalAlignment="Left" Grid.Row="1">
+								<ItemsPresenter x:Name="items"/>
+							</controlsPrimitives:PanningLayer>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 	</phone:PhoneApplicationPage.Resources>
  
     <!--Sample code showing usage of ApplicationBar-->
@@ -76,19 +107,28 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{d:DesignData /SampleData/StationsViewModelSampleData.xaml}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="127"/>
-            <RowDefinition/>
+        	<RowDefinition Height="120"/>
+        	<RowDefinition Height="40"/>
+        	<RowDefinition/>
         </Grid.RowDefinitions>
 
 
-        <TextBlock x:Name="address" Margin="12,5,0,0" Grid.Row="1" FontSize="21.333" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="Segoe WP Semibold" TextTrimming="WordEllipsis" />
+    	<controls:Panorama Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
+    		<controls:PanoramaItem Header="bencinas">
+    			<Grid>
+    				<ListBox x:Name="stationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Stations}"/>
+    			</Grid>
+    		</controls:PanoramaItem>
+    		<controls:PanoramaItem Header="otros">
+    			<Grid/>
+    		</controls:PanoramaItem>
+    	</controls:Panorama>
+
+
+        <TextBlock x:Name="address" Margin="28,5,0,0" Grid.Row="1" FontSize="21.333" Foreground="{StaticResource PhoneAccentBrush}" FontFamily="Segoe WP Semibold" TextTrimming="WordEllipsis" />
 
 
         <my:Map x:Name="map1" CredentialsProvider="AoCLhSPbKx0T0j_OqgRICrBA6z9VvF4ST9VrM-zd8XW13rE63U8ZPzvrcFdEpz_N" Grid.Row="0" Tap="open_bing_maps" />
-        <ListBox x:Name="stationList" ItemTemplate="{StaticResource StationTemplate}" Grid.Row="3" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Stations}"/>
-        <TextBlock Margin="12,8" Grid.Row="2" TextWrapping="Wrap" Text="bencina" FontSize="80" FontFamily="Segoe WP SemiLight"/>
            
                    
     </Grid>
