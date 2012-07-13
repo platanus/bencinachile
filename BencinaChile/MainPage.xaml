@@ -15,6 +15,7 @@
     shell:SystemTray.IsVisible="True" >
 
 	<phone:PhoneApplicationPage.Resources>
+        <local:StationIdImageConverter x:Key="IdImageConverter"/>
 		<DataTemplate x:Key="DataTemplate">
 			<StackPanel>
 				<TextBlock Text="{Binding Key, Mode=OneWay}"/>
@@ -47,7 +48,7 @@
 						<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
 					</my:Pushpin.Background>
 				</my:Pushpin>
-				<Image Grid.Column="1" Margin="8,8,8,0" Source="/Icons/4.png" Height="25" VerticalAlignment="Top"/>
+                <Image Grid.Column="1" Margin="8,8,8,0" Source="{Binding Path=BrandId, Converter={StaticResource IdImageConverter}}" Height="25" VerticalAlignment="Top"/>
 			</Grid>
 		</DataTemplate>
 		<Style x:Key="PanoramaStyle1" TargetType="controls:Panorama">
