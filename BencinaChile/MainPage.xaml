@@ -9,35 +9,65 @@
     xmlns:local="clr-namespace:BencinaChile"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:controlsPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=System.Windows"
     x:Class="BencinaChile.MainPage"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True" >
 
 	<phone:PhoneApplicationPage.Resources>
+        <CollectionViewSource x:Key="GasStations" Source="{Binding Stations}" Filter="GasStationsCollection_Filter">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Prices.G95"
+                            Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="OtherStations" Source="{Binding Stations}" Filter="OtherStationsCollection_Filter">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Prices.Kerosene"
+                            Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
         <local:StationIdImageConverter x:Key="IdImageConverter"/>
+        
 		<DataTemplate x:Key="DataTemplate">
 			<StackPanel>
 				<TextBlock Text="{Binding Key, Mode=OneWay}"/>
 				<TextBlock Text="{Binding Value, Mode=OneWay}"/>
 			</StackPanel>
 		</DataTemplate>
+        
 		<DataTemplate x:Key="StationTemplate">
-			<Grid Margin="12,0,0,0">
+			<Grid Margin="12,0,0,0" Width="381">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="42"/>
 					<ColumnDefinition Width="58"/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 				<StackPanel d:LayoutOverrides="Width, Height" Grid.Column="2">
-					<TextBlock Text="{Binding BrandName}" Margin="12,0,0,0"/>
-					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16"/>
-                    <TextBlock Text="{Binding Distance}" Margin="12,0,0,0" FontSize="12"/>
-                    <StackPanel Orientation="Horizontal">
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G93}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G95}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G97}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.Glc}" Margin="12,0,0,0"/>
+					<Grid Height="27" Margin="12,0,6,0">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Distance, StringFormat=\{0:0 mts\}}" FontSize="12" VerticalAlignment="Bottom" Grid.Column="1" Margin="12,0,0,0">
+                        	<TextBlock.Foreground>
+                        		<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+                        	</TextBlock.Foreground>
+                        </TextBlock>
+						<TextBlock Text="{Binding BrandName}" d:LayoutOverrides="Height"/>
+					</Grid>
+					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16">
+						<TextBlock.Foreground>
+							<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+						</TextBlock.Foreground>
+					</TextBlock>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G93, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
+						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G95, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
+						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G97, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
+						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
 					</StackPanel>
 				</StackPanel>
 				<my:Pushpin HorizontalAlignment="Left" Margin="5,8,0,8" Width="29" Content="{Binding PositionId}">
@@ -51,6 +81,7 @@
                 <Image Grid.Column="1" Margin="8,8,8,0" Source="{Binding Path=BrandId, Converter={StaticResource IdImageConverter}}" Height="25" VerticalAlignment="Top"/>
 			</Grid>
 		</DataTemplate>
+                
 		<Style x:Key="PanoramaStyle1" TargetType="controls:Panorama">
 			<Setter Property="ItemsPanel">
 				<Setter.Value>
@@ -117,12 +148,14 @@
     	<controls:Panorama Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
     		<controls:PanoramaItem Header="bencinas">
     			<Grid>
-    				<ListBox x:Name="stationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Stations}"/>
+    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}"/>
     			</Grid>
     		</controls:PanoramaItem>
     		<controls:PanoramaItem Header="otros">
-    			<Grid/>
-    		</controls:PanoramaItem>
+                <Grid>
+                    <ListBox x:Name="otherStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}"/>
+                </Grid>
+            </controls:PanoramaItem>
     	</controls:Panorama>
 
 

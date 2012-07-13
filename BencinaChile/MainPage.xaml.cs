@@ -149,8 +149,21 @@ namespace BencinaChile
 
         private void stationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedStation =  (Station)stationList.SelectedItem;
-            if (selectedStation != null)
+            if ((sender as ListBox).SelectedIndex == -1) return;
+
+            if ((sender as ListBox).Name == "gasStationList")
+            {
+                selectedStation = (Station)gasStationList.SelectedItem;
+                otherStationList.SelectedIndex = -1;
+            }
+            else 
+            {
+                selectedStation = (Station)otherStationList.SelectedItem;
+                gasStationList.SelectedIndex = -1;
+            }
+
+
+            if (selectedStation != null && stationViewModel != null)
             {
                 map1.SetView(selectedStation.Location, 15);
                 foreach (var station in stationViewModel.Stations) {
@@ -178,6 +191,16 @@ namespace BencinaChile
             bingMapsDirectionsTask.End = endSpaceNeedleLML;
 
             bingMapsDirectionsTask.Show();
+        }
+
+        private void GasStationsCollection_Filter(object sender, FilterEventArgs e)
+        {
+            e.Accepted = (((Station)e.Item).Prices.G93 != null || ((Station)e.Item).Prices.G95 != null || ((Station)e.Item).Prices.G97 != null || ((Station)e.Item).Prices.Diesel != null);
+        }
+
+        private void OtherStationsCollection_Filter(object sender, FilterEventArgs e)
+        {
+            e.Accepted = (((Station)e.Item).Prices.Kerosene != null || ((Station)e.Item).Prices.Glc != null || ((Station)e.Item).Prices.Gnc != null);
         }
 
     }
