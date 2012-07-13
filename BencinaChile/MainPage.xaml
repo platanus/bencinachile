@@ -13,7 +13,7 @@
     x:Class="BencinaChile.MainPage"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" >
+    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0" shell:SystemTray.ForegroundColor="Black">
 
 	<phone:PhoneApplicationPage.Resources>
         <CollectionViewSource x:Key="GasStations" Source="{Binding Stations}" Filter="GasStationsCollection_Filter">
