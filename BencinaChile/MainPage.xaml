@@ -39,31 +39,31 @@
 		</DataTemplate>
         
 		<DataTemplate x:Key="StationTemplate">
-			<Grid Margin="12,0,0,12" Width="381">
+			<Grid Margin="12,0,0,12">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="42"/>
 					<ColumnDefinition Width="58"/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
 				<StackPanel d:LayoutOverrides="Width, Height" Grid.Column="2">
-					<Grid Height="27" Margin="12,0,6,0">
+					<Grid Height="27" Margin="12,0,0,0" HorizontalAlignment="Left" Width="288">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition/>
-							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="207"/>
+							<ColumnDefinition Width="Auto" MinWidth="53"/>
 						</Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Distance, StringFormat=\{0:0 mts\}}" FontSize="12" VerticalAlignment="Bottom" Grid.Column="1" Margin="12,0,0,0">
+                        <TextBlock Text="{Binding Distance, StringFormat=\{0:0 mts\}}" FontSize="16" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,-28,0" TextAlignment="Right" HorizontalAlignment="Right" Width="76">
                         	<TextBlock.Foreground>
                         		<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
                         	</TextBlock.Foreground>
                         </TextBlock>
 						<TextBlock Text="{Binding BrandName}" d:LayoutOverrides="Height"/>
 					</Grid> 
-					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16">
+					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16" TextTrimming="WordEllipsis">
 						<TextBlock.Foreground>
 							<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
 						</TextBlock.Foreground>
 					</TextBlock>
-                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
                         <local:PriceControl Price="{Binding Prices.G93, StringFormat=\{0:c0\}}" Caption="G93"/>
                         <local:PriceControl Price="{Binding Prices.G95, StringFormat=\{0:c0\}}" Caption="G95"/>
                         <local:PriceControl Price="{Binding Prices.G97, StringFormat=\{0:c0\}}" Caption="G97"/>
@@ -137,7 +137,7 @@
 	</phone:PhoneApplicationPage.Foreground>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{d:DesignData /SampleData/StationsViewModelSampleData.xaml}" Margin="-5,-5,-5,-5">
+    <Grid x:Name="LayoutRoot" Background="Transparent" Margin="-5,-5,-5,-5" d:DataContext="{d:DesignData /SampleData/StationsViewModelSampleData.xaml}">
         <Grid.RowDefinitions>
         	<RowDefinition Height="120"/>
         	<RowDefinition Height="40"/>
@@ -148,7 +148,7 @@
     	<controls:Panorama Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
     		<controls:PanoramaItem Header="bencinas">
     			<Grid>
-    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}"/>
+    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Stations}"/>
     			</Grid>
     		</controls:PanoramaItem>
     		<controls:PanoramaItem Header="otros">
