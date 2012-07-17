@@ -39,7 +39,7 @@
 		</DataTemplate>
         
 		<DataTemplate x:Key="StationTemplate">
-			<Grid Margin="12,0,0,0" Width="381">
+			<Grid Margin="12,0,0,12" Width="381">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="42"/>
 					<ColumnDefinition Width="58"/>
@@ -57,18 +57,18 @@
                         	</TextBlock.Foreground>
                         </TextBlock>
 						<TextBlock Text="{Binding BrandName}" d:LayoutOverrides="Height"/>
-					</Grid>
+					</Grid> 
 					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16">
 						<TextBlock.Foreground>
 							<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
 						</TextBlock.Foreground>
 					</TextBlock>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G93, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G95, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.G97, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
-						<TextBlock TextWrapping="Wrap" Text="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Margin="12,0,0,0"/>
-					</StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <local:PriceControl Price="{Binding Prices.G93, StringFormat=\{0:c0\}}" Caption="G93"/>
+                        <local:PriceControl Price="{Binding Prices.G95, StringFormat=\{0:c0\}}" Caption="G95"/>
+                        <local:PriceControl Price="{Binding Prices.G97, StringFormat=\{0:c0\}}" Caption="G97"/>
+                        <local:PriceControl Price="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Caption="Diesel"/>
+                    </StackPanel>
 				</StackPanel>
 				<my:Pushpin HorizontalAlignment="Left" Margin="5,8,0,8" Width="29" Content="{Binding PositionId}">
 					<my:Pushpin.Foreground>

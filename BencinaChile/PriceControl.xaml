@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="BencinaChile.PriceControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <StackPanel x:Name="LayoutRoot" HorizontalAlignment="Center" Margin="5" VerticalAlignment="Center" >
+		<StackPanel.Background>
+			<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+		</StackPanel.Background>
+		<TextBlock Text="$789" x:Name="price" Margin="5,0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold">
+			<TextBlock.Foreground>
+				<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+			</TextBlock.Foreground>
+		</TextBlock>
+		<TextBlock Text="Diesel" x:Name="caption" FontSize="13.333" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,2">
+			<TextBlock.Foreground>
+				<SolidColorBrush Color="{StaticResource PhoneRadioCheckBoxCheckDisabledColor}"/>
+			</TextBlock.Foreground>
+		</TextBlock>
+	</StackPanel>
+</UserControl>
