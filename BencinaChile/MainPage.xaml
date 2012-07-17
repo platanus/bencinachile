@@ -30,6 +30,7 @@
         </CollectionViewSource>
 
         <local:StationIdImageConverter x:Key="IdImageConverter"/>
+        <local:StationVisitiblityConverter x:Key="VisibilityConverter"/>
         
 		<DataTemplate x:Key="DataTemplate">
 			<StackPanel>
@@ -40,18 +41,18 @@
         
 		<DataTemplate x:Key="GasStationPricesTemplate">			
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
-                        <local:PriceControl Price="{Binding Prices.G93, StringFormat=\{0:c0\}}" Caption="G93"/>
-                        <local:PriceControl Price="{Binding Prices.G95, StringFormat=\{0:c0\}}" Caption="G95"/>
-                        <local:PriceControl Price="{Binding Prices.G97, StringFormat=\{0:c0\}}" Caption="G97"/>
-                        <local:PriceControl Price="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Caption="Diesel"/>
+                <local:PriceControl Price="{Binding Prices.G93, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.G93, Converter={StaticResource VisibilityConverter}}" Caption="G93"/>
+                <local:PriceControl Price="{Binding Prices.G95, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.G95, Converter={StaticResource VisibilityConverter}}" Caption="G95"/>
+                <local:PriceControl Price="{Binding Prices.G97, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.G97, Converter={StaticResource VisibilityConverter}}" Caption="G97"/>
+                <local:PriceControl Price="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Diesel, Converter={StaticResource VisibilityConverter}}" Caption="Diesel"/>
                     </StackPanel>
 		</DataTemplate>
 		
 		<DataTemplate x:Key="OtherStationPricesTemplate">			
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
-                        <local:PriceControl Price="{Binding Prices.Kerosene, StringFormat=\{0:c0\}}" Caption="Parafina"/>
-                        <local:PriceControl Price="{Binding Prices.Gnc, StringFormat=\{0:c0\}}" Caption="Gas Natural"/>
-                        <local:PriceControl Price="{Binding Prices.Glc, StringFormat=\{0:c0\}}" Caption="Gas Liquado"/>
+                <local:PriceControl Price="{Binding Prices.Kerosene, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Kerosene, Converter={StaticResource VisibilityConverter}}" Caption="Parafina"/>
+                <local:PriceControl Price="{Binding Prices.Gnc, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Gnc, Converter={StaticResource VisibilityConverter}}" Caption="Gas Natural"/>
+                <local:PriceControl Price="{Binding Prices.Glc, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Glc, Converter={StaticResource VisibilityConverter}}" Caption="Gas Liquado"/>
                     </StackPanel>
 		</DataTemplate>
                 

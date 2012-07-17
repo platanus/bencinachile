@@ -100,6 +100,7 @@
     <Compile Include="Stations.cs" />
     <Compile Include="StationsViewModel.cs" />
     <Compile Include="Station.cs" />
+    <Compile Include="StationVisitiblityConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -143,15 +144,11 @@
     <Content Include="Icons\3.png" />
     <Content Include="Icons\4.png" />
     <Content Include="Icons\5.png" />
+    <Resource Include="Icons\Application_IconImage_173x173.png" />
+    <Resource Include="Icons\Application_IconImage_62x62.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Service References\GeoCodeService\configuration91.svcinfo" />
     <None Include="Service References\GeoCodeService\configuration.svcinfo" />
     <None Include="Service References\GeoCodeService\Reference.svcmap">
