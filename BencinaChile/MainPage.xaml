@@ -137,7 +137,7 @@
 	</phone:PhoneApplicationPage.Foreground>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{d:DesignData /SampleData/StationsViewModelSampleData.xaml}">
+    <Grid x:Name="LayoutRoot" Background="Transparent" d:DataContext="{d:DesignData /SampleData/StationsViewModelSampleData.xaml}" Margin="-5,-5,-5,-5">
         <Grid.RowDefinitions>
         	<RowDefinition Height="120"/>
         	<RowDefinition Height="40"/>
