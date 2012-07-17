@@ -38,48 +38,21 @@
 			</StackPanel>
 		</DataTemplate>
         
-		<DataTemplate x:Key="StationTemplate">
-			<Grid Margin="12,0,0,12">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="42"/>
-					<ColumnDefinition Width="58"/>
-					<ColumnDefinition/>
-				</Grid.ColumnDefinitions>
-				<StackPanel d:LayoutOverrides="Width, Height" Grid.Column="2">
-					<Grid Height="27" Margin="12,0,0,0" HorizontalAlignment="Left" Width="288">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="207"/>
-							<ColumnDefinition Width="Auto" MinWidth="53"/>
-						</Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Distance, StringFormat=\{0:0 mts\}}" FontSize="16" VerticalAlignment="Bottom" Grid.Column="1" Margin="0,0,-28,0" TextAlignment="Right" HorizontalAlignment="Right" Width="76">
-                        	<TextBlock.Foreground>
-                        		<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
-                        	</TextBlock.Foreground>
-                        </TextBlock>
-						<TextBlock Text="{Binding BrandName}" d:LayoutOverrides="Height"/>
-					</Grid> 
-					<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16" TextTrimming="WordEllipsis">
-						<TextBlock.Foreground>
-							<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
-						</TextBlock.Foreground>
-					</TextBlock>
+		<DataTemplate x:Key="GasStationPricesTemplate">			
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
                         <local:PriceControl Price="{Binding Prices.G93, StringFormat=\{0:c0\}}" Caption="G93"/>
                         <local:PriceControl Price="{Binding Prices.G95, StringFormat=\{0:c0\}}" Caption="G95"/>
                         <local:PriceControl Price="{Binding Prices.G97, StringFormat=\{0:c0\}}" Caption="G97"/>
                         <local:PriceControl Price="{Binding Prices.Diesel, StringFormat=\{0:c0\}}" Caption="Diesel"/>
                     </StackPanel>
-				</StackPanel>
-				<my:Pushpin HorizontalAlignment="Left" Margin="5,8,0,8" Width="29" Content="{Binding PositionId}">
-					<my:Pushpin.Foreground>
-						<SolidColorBrush Color="{StaticResource PhoneBackgroundColor}"/>
-					</my:Pushpin.Foreground>
-					<my:Pushpin.Background>
-						<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
-					</my:Pushpin.Background>
-				</my:Pushpin>
-                <Image Grid.Column="1" Margin="8,8,8,0" Source="{Binding Path=BrandId, Converter={StaticResource IdImageConverter}}" Height="25" VerticalAlignment="Top"/>
-			</Grid>
+		</DataTemplate>
+		
+		<DataTemplate x:Key="OtherStationPricesTemplate">			
+                    <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
+                        <local:PriceControl Price="{Binding Prices.Kerosene, StringFormat=\{0:c0\}}" Caption="Parafina"/>
+                        <local:PriceControl Price="{Binding Prices.Gnc, StringFormat=\{0:c0\}}" Caption="Gas Natural"/>
+                        <local:PriceControl Price="{Binding Prices.Glc, StringFormat=\{0:c0\}}" Caption="Gas Liquado"/>
+                    </StackPanel>
 		</DataTemplate>
                 
 		<Style x:Key="PanoramaStyle1" TargetType="controls:Panorama">
@@ -108,6 +81,84 @@
 								<ItemsPresenter x:Name="items"/>
 							</controlsPrimitives:PanningLayer>
 						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+		<Style x:Key="StationItemTemplate" TargetType="ListBoxItem">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="VerticalContentAlignment" Value="Top"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ListBoxItem">
+						
+						<Border x:Name="LayoutRoot" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="LayoutRoot">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource TransparentBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+											<DoubleAnimation Duration="0" To=".5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="ContentContainer"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="SelectionStates">
+									<VisualState x:Name="Unselected"/>
+									<VisualState x:Name="Selected">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+												<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							
+							<Grid Margin="12,0,0,12">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="42"/>
+									<ColumnDefinition Width="58"/>
+									<ColumnDefinition/>
+								</Grid.ColumnDefinitions>
+								<StackPanel d:LayoutOverrides="Width, Height" Grid.Column="2">
+									<Grid Height="27" Margin="12,0,0,0" HorizontalAlignment="Left" Width="288">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="197"/>
+											<ColumnDefinition Width="Auto" MinWidth="63"/>
+										</Grid.ColumnDefinitions>
+				                        <TextBlock Text="{Binding Distance, StringFormat=\{0:0 mts\}}" FontSize="16" VerticalAlignment="Bottom" Grid.Column="1" Margin="8,0,0,0" TextAlignment="Right" HorizontalAlignment="Right">
+				                        	<TextBlock.Foreground>
+				                        		<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+				                        	</TextBlock.Foreground>
+				                        </TextBlock>
+										<TextBlock Text="{Binding BrandName}" d:LayoutOverrides="Height"/>
+									</Grid> 
+									<TextBlock Text="{Binding Address}" Margin="12,0,0,0" FontSize="16" TextTrimming="WordEllipsis">
+										<TextBlock.Foreground>
+											<SolidColorBrush Color="{StaticResource PhoneBorderColor}"/>
+										</TextBlock.Foreground>
+									</TextBlock>
+									<ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+								</StackPanel>
+								<my:Pushpin HorizontalAlignment="Left" Margin="5,8,0,8" Width="29" Content="{Binding PositionId}">
+									<my:Pushpin.Foreground>
+										<SolidColorBrush Color="{StaticResource PhoneBackgroundColor}"/>
+									</my:Pushpin.Foreground>
+									<my:Pushpin.Background>
+										<SolidColorBrush Color="{StaticResource PhoneForegroundColor}"/>
+									</my:Pushpin.Background>
+								</my:Pushpin>
+				                <Image Grid.Column="1" Margin="8,8,8,0" Source="{Binding Path=BrandId, Converter={StaticResource IdImageConverter}}" Height="25" VerticalAlignment="Top"/>
+							</Grid>
+							</Border>
 					</ControlTemplate>
 				</Setter.Value>
 			</Setter>
@@ -148,12 +199,12 @@
     	<controls:Panorama Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
     		<controls:PanoramaItem Header="bencinas">
     			<Grid>
-    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Stations}"/>
+    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
     			</Grid>
     		</controls:PanoramaItem>
     		<controls:PanoramaItem Header="otros">
                 <Grid>
-                    <ListBox x:Name="otherStationList" ItemTemplate="{StaticResource StationTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}"/>
+                    <ListBox x:Name="otherStationList" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
                 </Grid>
             </controls:PanoramaItem>
     	</controls:Panorama>
