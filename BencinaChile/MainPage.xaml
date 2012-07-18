@@ -18,13 +18,13 @@
 	<phone:PhoneApplicationPage.Resources>
         <CollectionViewSource x:Key="GasStations" Source="{Binding Stations}" Filter="GasStationsCollection_Filter">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Prices.G95"
+                <scm:SortDescription PropertyName="Distance"
                             Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <CollectionViewSource x:Key="OtherStations" Source="{Binding Stations}" Filter="OtherStationsCollection_Filter">
             <CollectionViewSource.SortDescriptions>
-                <scm:SortDescription PropertyName="Prices.Kerosene"
+                <scm:SortDescription PropertyName="Distance"
                             Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
@@ -86,7 +86,85 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<Style x:Key="StationItemTemplate" TargetType="ListBoxItem">
+
+        <Style x:Key="ListPickerStyle1" TargetType="toolkit:ListPicker">
+            <Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
+            <Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="{StaticResource PhoneTouchTargetOverhang}"/>
+            <Setter Property="PickerPageUri" Value="/Microsoft.Phone.Controls.Toolkit;component/ListPicker/ListPickerPage.xaml"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="toolkit:ListPicker">
+                        <StackPanel Margin="-4,-10,0,0">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="PickerStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Highlighted">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneTextBoxEditBorderBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentControl ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontSize="{StaticResource PhoneFontSizeNormal}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0 0 0 8"/>
+                            <Grid>
+                                <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}">
+                                    <UserControl x:Name="UserControl" FontFamily="Segoe WP">
+                                    	<UserControl.Foreground>
+                                    		<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+                                    	</UserControl.Foreground>
+                                        <StackPanel>
+                                            <TextBlock x:Name="MultipleSelectionModeSummary" Margin="8 8 0 8" Foreground="#FFC43A3A"/>
+                                            <Canvas x:Name="ItemsPresenterHost" MinHeight="46">
+                                                <ItemsPresenter x:Name="ItemsPresenter">
+                                                    <ItemsPresenter.RenderTransform>
+                                                        <TranslateTransform x:Name="ItemsPresenterTranslateTransform"/>
+                                                    </ItemsPresenter.RenderTransform>
+                                                </ItemsPresenter>
+                                            </Canvas>
+                                        </StackPanel>
+                                    </UserControl>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="ListPickerItemTemplate">
+        	<Grid>
+        		<TextBlock Margin="0,0,1,0" TextWrapping="Wrap" d:LayoutOverrides="Width, Height" Text="{Binding Name}"/>
+        	</Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="ListPickerFullItem">
+        	<Grid>
+        		<TextBlock Margin="12,5,0,5" TextWrapping="Wrap" d:LayoutOverrides="Width, Height" Text="{Binding Name}" FontSize="40"/>
+        	</Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PanoramaItemHeaderTemplate">
+            <ContentPresenter>
+                <StackPanel Height="129">
+                    <TextBlock Text="{Binding}" FontSize="72" Margin="0,7,0,0" />
+                    <toolkit:ListPicker x:Name="listPick" Margin="0,-21,0,0" BorderThickness="0" Style="{StaticResource ListPickerStyle1}" ItemTemplate="{StaticResource ListPickerItemTemplate}" FullModeItemTemplate="{StaticResource ListPickerFullItem}"/>
+                </StackPanel>
+            </ContentPresenter>
+        </DataTemplate>
+
+        <Style x:Key="StationItemTemplate" TargetType="ListBoxItem">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="BorderThickness" Value="0"/>
 			<Setter Property="BorderBrush" Value="Transparent"/>
@@ -197,13 +275,13 @@
         </Grid.RowDefinitions>
 
 
-    	<controls:Panorama Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
-    		<controls:PanoramaItem Header="bencinas">
+    	<controls:Panorama x:Name="StationsPanorama" Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
+            <controls:PanoramaItem Header="bencinas" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
     			<Grid>
     				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
     			</Grid>
     		</controls:PanoramaItem>
-    		<controls:PanoramaItem Header="otros">
+            <controls:PanoramaItem Header="otros" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
                 <Grid>
                     <ListBox x:Name="otherStationList" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
                 </Grid>

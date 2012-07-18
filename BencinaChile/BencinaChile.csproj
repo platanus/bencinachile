@@ -96,6 +96,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="SortType.cs" />
     <Compile Include="StatioIdImageConverter.cs" />
     <Compile Include="Stations.cs" />
     <Compile Include="StationsViewModel.cs" />
@@ -163,6 +164,9 @@
     <WCFMetadataStorage Include="Service References\GeoCodeService\" />
   </ItemGroup>
   <ItemGroup>
+    <DesignData Include="SampleData\SortTypeSampleData.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </DesignData>
     <DesignData Include="SampleData\StationsViewModelSampleData.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </DesignData>

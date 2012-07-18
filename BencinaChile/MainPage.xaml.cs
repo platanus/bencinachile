@@ -20,6 +20,7 @@ using AgFx;
 using AgFx.Controls;
 
 using BencinaChile.GeoCodeService;
+using System.ComponentModel;
 
 namespace BencinaChile
 {
@@ -46,6 +47,55 @@ namespace BencinaChile
 
             // TODO: Start map centered at the last location
 
+            StationsPanorama.Loaded += (sender, ev) =>
+            {
+                // Don't do anything if we already have the data
+                if (stationViewModel != null) return;
+                
+                // Set the Sort Types
+                List<SortType> gasSortTypes = new List<SortType>();
+                gasSortTypes.Add(new SortType() { Name = "Distancia", PropetyKey = "Distance" });
+                gasSortTypes.Add(new SortType() { Name = "Gasolina 93", PropetyKey = "Prices.G93" });
+                gasSortTypes.Add(new SortType() { Name = "Gasolina 95", PropetyKey = "Prices.G95" });
+                gasSortTypes.Add(new SortType() { Name = "Gasolina 97", PropetyKey = "Prices.G97" });
+                gasSortTypes.Add(new SortType() { Name = "Diesel", PropetyKey = "Prices.Diesel" });
+
+                List<SortType> otherSortTypes = new List<SortType>();
+                otherSortTypes.Add(new SortType() { Name = "Distancia", PropetyKey = "Distance" });
+                otherSortTypes.Add(new SortType() { Name = "Parafina", PropetyKey = "Prices.Kerosene" });
+                otherSortTypes.Add(new SortType() { Name = "Gas natural", PropetyKey = "Prices.Gnl" });
+                otherSortTypes.Add(new SortType() { Name = "Gas liquado", PropetyKey = "Prices.Gnc" });
+
+                var gasListPicker = FindDescendant<ListPicker>(StationsPanorama.Items[0] as PanoramaItem);
+                gasListPicker.ExpansionMode = ExpansionMode.FullScreenOnly;
+                gasListPicker.ItemsSource = gasSortTypes;
+
+                var otherListPicker = FindDescendant<ListPicker>(StationsPanorama.Items[1] as PanoramaItem);
+                otherListPicker.ExpansionMode = ExpansionMode.FullScreenOnly;
+                otherListPicker.ItemsSource = otherSortTypes;
+                
+                CollectionViewSource gCvs = (CollectionViewSource)Resources["GasStations"];
+                CollectionViewSource oCvs = (CollectionViewSource)Resources["OtherStations"];
+
+                gasListPicker.SelectionChanged += (send, arg) =>
+                {
+                    var picker = (ListPicker)send;
+                    var newType = (SortType)picker.SelectedItem;
+                    SortDescription gasSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
+                    gCvs.SortDescriptions[0] = gasSort;
+                    gCvs.View.Refresh();
+                };
+
+                gasListPicker.SelectionChanged += (send, arg) =>
+                {
+                    var picker = (ListPicker)send;
+                    var newType = (SortType)picker.SelectedItem;
+                    SortDescription otherSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
+                    oCvs.SortDescriptions[0] = otherSort;
+                    oCvs.View.Refresh();
+                };
+            };
+
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -61,7 +111,7 @@ namespace BencinaChile
 
             // Start the GPS
             gcw.Start();
-
+            
             // Set the loading in with a GPS message
             GlobalLoading.Instance.IsLoading = true;
             GlobalLoading.Instance.SetText("Buscando ubicación...");
@@ -171,6 +221,7 @@ namespace BencinaChile
                 }
                 selectedStation.PushPin.Background = new SolidColorBrush(Colors.Blue);
             }
+
         }
 
         private void open_bing_maps(object sender, System.Windows.Input.GestureEventArgs e)
@@ -203,5 +254,37 @@ namespace BencinaChile
             e.Accepted = (((Station)e.Item).Prices.Kerosene != null || ((Station)e.Item).Prices.Glc != null || ((Station)e.Item).Prices.Gnc != null);
         }
 
+        public T FindDescendant<T>(DependencyObject obj) where T : DependencyObject
+        {
+            // Check if this object is the specified type
+            if (obj is T)
+                return obj as T;
+
+            // Check for children
+            int childrenCount = VisualTreeHelper.GetChildrenCount(obj);
+            if (childrenCount < 1)
+                return null;
+
+            // First check all the children
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+                if (child is T)
+                    return child as T;
+            }
+
+            // Then check the childrens children
+            for (int i = 0; i < childrenCount; i++)
+            {
+                DependencyObject child = FindDescendant<T>(VisualTreeHelper.GetChild(obj, i));
+                if (child != null && child is T)
+                    return child as T;
+            }
+
+            return null;
+        }
+
     }
+
+
 }
