@@ -97,7 +97,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="SortType.cs" />
-    <Compile Include="StatioIdImageConverter.cs" />
+    <Compile Include="StationIdImageConverter.cs" />
     <Compile Include="Stations.cs" />
     <Compile Include="StationsViewModel.cs" />
     <Compile Include="Station.cs" />
