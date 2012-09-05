@@ -33,10 +33,19 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <HyperlinkButton NavigateUri="mailto:jidonoso@gmail.com" Content="Feedback" TargetName="_blank" Margin="0,449,0,0" />
-            <TextBlock TextWrapping="Wrap" 
-                       Grid.Row="2"
-                       Text="Esta aplicación utiliza los datos obtenidos desde www.bencinaenlinea.cl, aplicación desarrollada por la Comisión Nacional de Energía (CNE)" Margin="9,-7,0,0" Style="{StaticResource PhoneTextNormalStyle}" Width="446" />
+            <HyperlinkButton NavigateUri="mailto:jidonoso@gmail.com" Content="Feedback" TargetName="_blank" Margin="192,272,131,296" />
+            <TextBlock TextWrapping="Wrap" Margin="212,21,0,0" Style="{StaticResource PhoneTextNormalStyle}" Height="237" VerticalAlignment="Top" ><Run Text="Esta aplicación utiliza los datos obtenidos desde www.bencinaenlinea.cl, aplicación desarrollada por la Comisión Nacional de Energía (CNE)"/><LineBreak/><Run/><LineBreak/><Run Text="Cualquier tipo de feedback es muy bienvenido."/></TextBlock>
+            <Image Margin="33,8,0,0" Source="/Icons/platanus.png" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top" Height="169" Width="143" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
+            <Grid Height="63" Margin="212,0,8,129" VerticalAlignment="Bottom">
+            	<TextBlock Margin="-180,-219,0,0" TextWrapping="Wrap" Text="PLATANUS" FontWeight="Bold" FontSize="29.333" HorizontalAlignment="Left" Height="45" VerticalAlignment="Top" Width="226"/>
+            	<HyperlinkButton NavigateUri="http://platan.us" Content="www.platan.us" TargetName="_blank" Height="29" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#005631C0" Margin="-189,-190,0,0" d:LayoutOverrides="HorizontalAlignment" >
+            		<HyperlinkButton.Foreground>
+            			<SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+            		</HyperlinkButton.Foreground>
+            	</HyperlinkButton>
+            
+
+            </Grid>
             
 
         </Grid>

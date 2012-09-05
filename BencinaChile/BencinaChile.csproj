@@ -156,6 +156,7 @@
     <Content Include="Icons\5.png" />
     <Resource Include="Icons\Application_IconImage_173x173.png" />
     <Resource Include="Icons\Application_IconImage_62x62.png" />
+    <Content Include="Icons\platanus.png" />
     <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
