@@ -52,7 +52,7 @@
                     <StackPanel Orientation="Horizontal" Margin="8,0,0,0">
                 <local:PriceControl Price="{Binding Prices.Kerosene, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Kerosene, Converter={StaticResource VisibilityConverter}}" Caption="Parafina"/>
                 <local:PriceControl Price="{Binding Prices.Gnc, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Gnc, Converter={StaticResource VisibilityConverter}}" Caption="Gas Natural"/>
-                <local:PriceControl Price="{Binding Prices.Glc, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Glc, Converter={StaticResource VisibilityConverter}}" Caption="Gas Liquado"/>
+                <local:PriceControl Price="{Binding Prices.Glp, StringFormat=\{0:c0\}}" Visibility="{Binding Path=Prices.Glp, Converter={StaticResource VisibilityConverter}}" Caption="Gas Liquado"/>
                     </StackPanel>
 		</DataTemplate>
                 

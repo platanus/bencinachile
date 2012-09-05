@@ -63,8 +63,8 @@ namespace BencinaChile
                 List<SortType> otherSortTypes = new List<SortType>();
                 otherSortTypes.Add(new SortType() { Name = "Distancia", PropetyKey = "Distance" });
                 otherSortTypes.Add(new SortType() { Name = "Parafina", PropetyKey = "Prices.Kerosene" });
-                otherSortTypes.Add(new SortType() { Name = "Gas natural", PropetyKey = "Prices.Gnl" });
-                otherSortTypes.Add(new SortType() { Name = "Gas liquado", PropetyKey = "Prices.Gnc" });
+                otherSortTypes.Add(new SortType() { Name = "Gas natural", PropetyKey = "Prices.Gnc" });
+                otherSortTypes.Add(new SortType() { Name = "Gas liquado", PropetyKey = "Prices.Glp" });
 
                 var gasListPicker = FindDescendant<ListPicker>(StationsPanorama.Items[0] as PanoramaItem);
                 gasListPicker.ExpansionMode = ExpansionMode.FullScreenOnly;
@@ -251,7 +251,7 @@ namespace BencinaChile
 
         private void OtherStationsCollection_Filter(object sender, FilterEventArgs e)
         {
-            e.Accepted = (((Station)e.Item).Prices.Kerosene != null || ((Station)e.Item).Prices.Glc != null || ((Station)e.Item).Prices.Gnc != null);
+            e.Accepted = (((Station)e.Item).Prices.Kerosene != null || ((Station)e.Item).Prices.Glp != null || ((Station)e.Item).Prices.Gnc != null);
         }
 
         public T FindDescendant<T>(DependencyObject obj) where T : DependencyObject

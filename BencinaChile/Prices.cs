@@ -33,8 +33,8 @@ namespace BencinaChile
         [JsonProperty(PropertyName = "gnc")]
         public int? Gnc { get; set; }
 
-        [JsonProperty(PropertyName = "glc")]
-        public int? Glc { get; set; }
+        [JsonProperty(PropertyName = "glp")]
+        public int? Glp { get; set; }
 
 
     }
