@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("BencinaChile")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Platanus SpA")]
 [assembly: AssemblyProduct("BencinaChile")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright Platanus SpA©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
