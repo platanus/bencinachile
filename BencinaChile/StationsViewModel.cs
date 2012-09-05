@@ -13,6 +13,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Globalization;
 
 namespace BencinaChile
 {
@@ -38,7 +39,7 @@ namespace BencinaChile
 
             public LoadRequest GetLoadRequest(LocationLoadContext loadContext, System.Type objectType)
             {
-                string uri = String.Format(StationsSearchUriFormat, loadContext.Latitude, loadContext.Longitude);
+                string uri = String.Format(StationsSearchUriFormat, loadContext.Latitude.ToString(CultureInfo.InvariantCulture), loadContext.Longitude.ToString(CultureInfo.InvariantCulture));
                 return new WebLoadRequest(loadContext, new Uri(uri));
             }
 
