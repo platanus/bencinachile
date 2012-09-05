@@ -275,12 +275,12 @@
     	<controls:Panorama x:Name="StationsPanorama" Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
             <controls:PanoramaItem Header="bencinas" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
     			<Grid>
-    				<ListBox x:Name="gasStationList" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
+                    <ListBox x:Name="gasStationList" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
     			</Grid>
     		</controls:PanoramaItem>
             <controls:PanoramaItem Header="otros" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
                 <Grid>
-                    <ListBox x:Name="otherStationList" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
+                    <ListBox x:Name="otherStationList" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
                 </Grid>
             </controls:PanoramaItem>
     	</controls:Panorama>

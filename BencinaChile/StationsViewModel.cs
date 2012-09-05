@@ -61,8 +61,14 @@ namespace BencinaChile
                 var i = 1;
                 foreach (var item in jarray.Items)
                 {
-                    item.PositionId = i;
                     item.SetDistanceFrom(new GeoCoordinate(loadContext.Latitude, loadContext.Longitude));
+                }
+                
+                jarray.Items.Sort(delegate(Station s1, Station s2) { return s1.Distance.CompareTo(s2.Distance); });
+
+                foreach (var item in jarray.Items)
+                {
+                    item.PositionId = i;
                     vm.Stations.Add(item);
                     i++;
                 }
