@@ -13,16 +13,30 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AgFx.Controls;
+using BencinaChile.Utilities;
 
 namespace BencinaChile
 {
     public partial class App : Application
     {
         /// <summary>
+        /// Settings helper
+        /// </summary>
+        public AppSettings Settings { get; private set; }
+
+        /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrameEx RootFrame { get; private set; }
+
+        /// <summary>
+        /// The current casted app
+        /// </summary>
+        public new static App Current
+        {
+            get { return (App)Application.Current; }
+        }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -64,6 +78,8 @@ namespace BencinaChile
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // Initialize the settings
+            Settings = new AppSettings();
         }
 
         // Code to execute when the application is activated (brought to foreground)

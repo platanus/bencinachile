@@ -1,0 +1,70 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="BencinaChile.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <controls:Pivot Title="BENCINA CHILE">
+            <!--Pivot item one-->
+            <controls:PivotItem Header="opciones">
+                <StackPanel>
+                    <toolkit:ToggleSwitch 
+                        Content="Habilitar Posición"
+                        x:Name="EnableLocation"
+                        Checked="EnableLocation_Checked"
+                        Unchecked="EnableLocation_Unchecked"/>
+                    <TextBlock TextWrapping="Wrap" Margin="12,0,12,0">
+                        Tu privacidad es importante para nosotros. Esta aplicación usa tu posición actual para obtener las bencineras más cercanas. Ésta puede ser guardad y compartida. Tu puedes deshabilitar el servicio de geoposición.
+                    </TextBlock>
+                    <TextBlock Tap="Feedback_Tap" Margin="12,10,12,0">Si tienes alguna pregunta mandanos un&#160;<Underline>email</Underline>.</TextBlock>
+                </StackPanel>
+            </controls:PivotItem>
+
+            <!--Pivot item two-->
+            <controls:PivotItem Header="acerca de...">
+                <StackPanel x:Name="ContentPanel" Margin="12,0,12,10">
+                    <StackPanel Orientation="Horizontal" Tap="Platanus_Tap">
+                        <Image Source="/Icons/platanus.png" Stretch="Fill" Width="80" />
+                        <StackPanel VerticalAlignment="Center" Height="59" Width="352">
+                            <TextBlock TextWrapping="Wrap" Text="PLATANUS" FontWeight="Bold" FontSize="29.333" HorizontalAlignment="Center"/>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,-10,0,0">www.platan.us</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,20,12,0">Esta aplicación utiliza los datos obtenidos desde la Comisión Nacional de Energía (CNE) a travez de la API creada por Satelinx</TextBlock>
+
+                    <TextBlock Tap="Feedback_Tap" TextWrapping="Wrap" Margin="0,10,12,0">Cualquier tipo de feedback es muy bienvenido. Puedes enviarlo por&#160;<Underline>email</Underline>.</TextBlock>
+                    <TextBlock Tap="Satelinx_Tap" Margin="0,10,12,0"><Underline>API Bencinas</Underline>&#160;por Satelinx.</TextBlock>
+
+                </StackPanel>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+    
+</phone:PhoneApplicationPage>

@@ -286,7 +286,7 @@ namespace BencinaChile
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
     }
