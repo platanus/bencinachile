@@ -21,6 +21,7 @@ using AgFx.Controls;
 
 using BencinaChile.GeoCodeService;
 using System.ComponentModel;
+using Microsoft.Phone.Info;
 
 namespace BencinaChile
 {
@@ -36,11 +37,23 @@ namespace BencinaChile
         GeoCoordinate currentLocation;
         Station selectedStation;
         StationsViewModel stationViewModel;
-        
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
+
+            //Get the unique id and save it
+            if (App.Current.Settings.UniqueId == "")
+            {
+                object DeviceUniqueID;
+                byte[] DeviceIDbyte = null;
+                if (DeviceExtendedProperties.TryGetValue("DeviceUniqueId", out DeviceUniqueID))
+                    DeviceIDbyte = (byte[])DeviceUniqueID;
+                string DeviceID = Convert.ToBase64String(DeviceIDbyte);
+
+                App.Current.Settings.UniqueId = DeviceID.ToString();
+            }
 
             // Start the map
             map1.Mode = new RoadMode();
@@ -54,18 +67,19 @@ namespace BencinaChile
                 
                 // Set the Sort Types
                 List<SortType> gasSortTypes = new List<SortType>();
-                gasSortTypes.Add(new SortType() { Name = "Distancia", PropetyKey = "Distance" });
-                gasSortTypes.Add(new SortType() { Name = "Gasolina 93", PropetyKey = "Prices.G93" });
-                gasSortTypes.Add(new SortType() { Name = "Gasolina 95", PropetyKey = "Prices.G95" });
-                gasSortTypes.Add(new SortType() { Name = "Gasolina 97", PropetyKey = "Prices.G97" });
-                gasSortTypes.Add(new SortType() { Name = "Diesel", PropetyKey = "Prices.Diesel" });
+                gasSortTypes.Add(new SortType() { Name = "distancia", PropetyKey = "Distance" });
+                gasSortTypes.Add(new SortType() { Name = "gasolina 93", PropetyKey = "Prices.G93" });
+                gasSortTypes.Add(new SortType() { Name = "gasolina 95", PropetyKey = "Prices.G95" });
+                gasSortTypes.Add(new SortType() { Name = "gasolina 97", PropetyKey = "Prices.G97" });
+                gasSortTypes.Add(new SortType() { Name = "diesel", PropetyKey = "Prices.Diesel" });
 
                 List<SortType> otherSortTypes = new List<SortType>();
-                otherSortTypes.Add(new SortType() { Name = "Distancia", PropetyKey = "Distance" });
-                otherSortTypes.Add(new SortType() { Name = "Parafina", PropetyKey = "Prices.Kerosene" });
-                otherSortTypes.Add(new SortType() { Name = "Gas natural", PropetyKey = "Prices.Gnc" });
-                otherSortTypes.Add(new SortType() { Name = "Gas liquado", PropetyKey = "Prices.Glp" });
+                otherSortTypes.Add(new SortType() { Name = "distancia", PropetyKey = "Distance" });
+                otherSortTypes.Add(new SortType() { Name = "parafina", PropetyKey = "Prices.Kerosene" });
+                otherSortTypes.Add(new SortType() { Name = "gas natural", PropetyKey = "Prices.Gnc" });
+                otherSortTypes.Add(new SortType() { Name = "gas liquado", PropetyKey = "Prices.Glp" });
 
+                // Set the list pickers
                 var gasListPicker = FindDescendant<ListPicker>(StationsPanorama.Items[0] as PanoramaItem);
                 gasListPicker.ExpansionMode = ExpansionMode.FullScreenOnly;
                 gasListPicker.ItemsSource = gasSortTypes;
@@ -77,22 +91,29 @@ namespace BencinaChile
                 CollectionViewSource gCvs = (CollectionViewSource)Resources["GasStations"];
                 CollectionViewSource oCvs = (CollectionViewSource)Resources["OtherStations"];
 
+                // Handle the list picker selection change events
                 gasListPicker.SelectionChanged += (send, arg) =>
                 {
                     var picker = (ListPicker)send;
                     var newType = (SortType)picker.SelectedItem;
-                    SortDescription gasSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
-                    gCvs.SortDescriptions[0] = gasSort;
-                    gCvs.View.Refresh();
+                    if (oCvs.View != null)
+                    {
+                        SortDescription gasSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
+                        gCvs.SortDescriptions[0] = gasSort;
+                        gCvs.View.Refresh();
+                    }
                 };
 
-                gasListPicker.SelectionChanged += (send, arg) =>
+                otherListPicker.SelectionChanged += (send, arg) =>
                 {
                     var picker = (ListPicker)send;
                     var newType = (SortType)picker.SelectedItem;
-                    SortDescription otherSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
-                    oCvs.SortDescriptions[0] = otherSort;
-                    oCvs.View.Refresh();
+                    if (oCvs.View != null)
+                    {
+                        SortDescription otherSort = new SortDescription(newType.PropetyKey, ListSortDirection.Ascending);
+                        oCvs.SortDescriptions[0] = otherSort;
+                        oCvs.View.Refresh();
+                    }
                 };
             };
 
@@ -101,9 +122,17 @@ namespace BencinaChile
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            var msg = "";
 
             // Don't do anything if we already have the data
-            if (stationViewModel != null) return;
+            if (stationViewModel != null || !App.Current.Settings.LocationEnabledSetting)
+            {
+                // Show a error message instead of the list of gas stations
+                msg = "No pudimos encontrar tu posición actual.";
+                loadingText1.Text = msg;
+                loadingText2.Text = msg;
+                return;
+            }
             
             // Prevent the creation of another watcher
             if (gcw == null)
@@ -111,7 +140,12 @@ namespace BencinaChile
 
             // Start the GPS
             gcw.Start();
-            
+
+            // Show a error message instead of the list of gas stations
+            msg = "Espera mientras buscamos las bombas cercanas...";
+            loadingText1.Text = msg;
+            loadingText2.Text = msg;
+
             // Set the loading in with a GPS message
             GlobalLoading.Instance.IsLoading = true;
             GlobalLoading.Instance.SetText("Buscando ubicación...");
@@ -134,6 +168,8 @@ namespace BencinaChile
                     var loadContext = new LocationLoadContext(DateTime.Now.Ticks.ToString());
                     loadContext.Latitude = currentLocation.Latitude;
                     loadContext.Longitude = currentLocation.Longitude;
+                    loadContext.UniqueId = App.Current.Settings.UniqueId;
+                    loadContext.OsVersion = System.Environment.OSVersion.Version.Major.ToString() + "." + System.Environment.OSVersion.Version.Minor.ToString();
 
                     // Try to get and address reference to the location
                     ReverseGeocodeRequest reverseGeocodeRequest = new ReverseGeocodeRequest();
@@ -164,6 +200,12 @@ namespace BencinaChile
                     this.DataContext = DataManager.Current.Load<StationsViewModel>(loadContext,
                         (vm) =>
                         {
+
+                            loadingText1.Visibility = Visibility.Collapsed;
+                            loadingText2.Visibility = Visibility.Collapsed;
+                            gasStationList.Visibility = Visibility.Visible;
+                            otherStationList.Visibility = Visibility.Visible;
+                            
                             stationViewModel = vm;
                         
                             foreach(var station in stationViewModel.Stations){
@@ -176,9 +218,20 @@ namespace BencinaChile
                         },
                         (ex) =>
                         {
-                            MessageBox.Show("Failed to get data for ");
+                            MessageBox.Show("No pudimos encontrar la información. Revisa tu conección a interent.");
                         }
                     );
+                }
+                else if (ev.Status == GeoPositionStatus.Disabled)
+                {
+                    // Show a error message instead of the list of gas stations
+                    msg = "No pudimos encontrar tu posición actual.";
+                    loadingText1.Text = msg;
+                    loadingText2.Text = msg;
+
+                    // Unset the global loading message
+                    GlobalLoading.Instance.IsLoading = false;
+                    GlobalLoading.Instance.SetText("");
                 }
             };
         }
@@ -197,8 +250,14 @@ namespace BencinaChile
             SystemTray.ForegroundColor = Colors.Black;
         }
 
+        /// <summary>
+        /// When the station is taped, moves the map and change the selected pushpin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void stationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Does not do anything if there is nothing selected
             if ((sender as ListBox).SelectedIndex == -1) return;
 
             if ((sender as ListBox).Name == "gasStationList")
@@ -212,13 +271,17 @@ namespace BencinaChile
                 gasStationList.SelectedIndex = -1;
             }
 
-
             if (selectedStation != null && stationViewModel != null)
             {
+                // Move the map
                 map1.SetView(selectedStation.Location, 15);
+                
+                // Reset all the pushpins
                 foreach (var station in stationViewModel.Stations) {
                     station.PushPin.Background = new SolidColorBrush(Colors.Black);
                 }
+
+                // Highlight the selected station pushpin
                 selectedStation.PushPin.Background = new SolidColorBrush(Colors.Blue);
             }
 

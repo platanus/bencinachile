@@ -16,7 +16,8 @@ namespace BencinaChile
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-
+        public string UniqueId { get; set; }
+        public string OsVersion { get; set; }
 
         public string ComputedAddress {
             get {

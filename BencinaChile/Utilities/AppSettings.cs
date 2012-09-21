@@ -12,9 +12,11 @@ namespace BencinaChile.Utilities
 
         // The isolated storage key names of our settings
         const string LocationEnabledName = "LocationEnabledSetting";
+        const string UniqueIdName = "UniqueId";
 
         // The default value of our settings
         const bool LocationEnabledDefault = true;
+        const string UniqueIdDefault = "";
 
         /// <summary>
         /// Constructor that gets the application settings.
@@ -106,6 +108,24 @@ namespace BencinaChile.Utilities
             set
             {
                 if (AddOrUpdateValue(LocationEnabledName, value))
+                {
+                    Save();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Property to get and set a Location Enabled setting.
+        /// </summary>
+        public string UniqueId
+        {
+            get
+            {
+                return GetValueOrDefault<string>(UniqueIdName, UniqueIdDefault);
+            }
+            set
+            {
+                if (AddOrUpdateValue(UniqueIdName, value))
                 {
                     Save();
                 }

@@ -35,11 +35,15 @@ namespace BencinaChile
 
         public class TwitterViewModelDataLoader : IDataLoader<LocationLoadContext>
         {
-            private const string StationsSearchUriFormat = "http://bencinas.satelinx.com/api/closest?developer_key=a608233473cdad3022a2c4ceeec2508b106e49539fd17e96283e3d181d9955a7&latitude={0}&longitude={1}";
+            private const string StationsSearchUriFormat = "http://bencinas.satelinx.com/api/closest?developer_key=a608233473cdad3022a2c4ceeec2508b106e49539fd17e96283e3d181d9955a7&latitude={0}&longitude={1}&unique_id={2}&phone_version={3}";
 
             public LoadRequest GetLoadRequest(LocationLoadContext loadContext, System.Type objectType)
             {
-                string uri = String.Format(StationsSearchUriFormat, loadContext.Latitude.ToString(CultureInfo.InvariantCulture), loadContext.Longitude.ToString(CultureInfo.InvariantCulture));
+                string uri = String.Format(StationsSearchUriFormat,
+                    loadContext.Latitude.ToString(CultureInfo.InvariantCulture),
+                    loadContext.Longitude.ToString(CultureInfo.InvariantCulture),
+                    loadContext.UniqueId,
+                    loadContext.OsVersion);
                 return new WebLoadRequest(loadContext, new Uri(uri));
             }
 

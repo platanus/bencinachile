@@ -275,12 +275,22 @@
     	<controls:Panorama x:Name="StationsPanorama" Title="panorama" Grid.Row="2" Style="{StaticResource PanoramaStyle1}">
             <controls:PanoramaItem Header="bencinas" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
     			<Grid>
-                    <ListBox x:Name="gasStationList" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
+                    <TextBlock x:Name="loadingText1" Text="Espera mientras buscamos las bombas cercanas..." Margin="12,0,0,0" FontSize="32" TextWrapping="Wrap" FontFamily="Segoe WP SemiLight">
+                    	<TextBlock.Foreground>
+                    		<SolidColorBrush Color="{StaticResource PhoneSubtleColor}"/>
+                    	</TextBlock.Foreground>
+                    </TextBlock>
+                    <ListBox x:Name="gasStationList" Visibility="Collapsed" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource GasStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource GasStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
     			</Grid>
     		</controls:PanoramaItem>
             <controls:PanoramaItem Header="otros" HeaderTemplate="{StaticResource PanoramaItemHeaderTemplate}">
                 <Grid>
-                    <ListBox x:Name="otherStationList" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
+                    <TextBlock x:Name="loadingText2" Text="Espera mientras buscamos las bombas cercanas..." Margin="12,0,0,0" FontSize="32" TextWrapping="Wrap" FontFamily="Segoe WP SemiLight">
+                    	<TextBlock.Foreground>
+                    		<SolidColorBrush Color="{StaticResource PhoneSubtleColor}"/>
+                    	</TextBlock.Foreground>
+                    </TextBlock>
+                    <ListBox x:Name="otherStationList" Visibility="Collapsed" toolkit:TiltEffect.IsTiltEnabled="True" ItemTemplate="{StaticResource OtherStationPricesTemplate}" SelectionChanged="stationList_SelectionChanged" ItemsSource="{Binding Source={StaticResource OtherStations}}" ItemContainerStyle="{StaticResource StationItemTemplate}"/>
                 </Grid>
             </controls:PanoramaItem>
     	</controls:Panorama>
