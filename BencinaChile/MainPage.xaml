@@ -246,7 +246,8 @@
  
     <!--Sample code showing usage of ApplicationBar-->
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized" Opacity="0.5">
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Opacity="0.7">
+            <shell:ApplicationBarIconButton Text="Pinear este lugar" Click="ApplicationBarIconPin_Click" IconUri="/Icons/AppBar.New.png"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Opciones" Click="ApplicationBarMenuItem_Click"/>
             </shell:ApplicationBar.MenuItems>

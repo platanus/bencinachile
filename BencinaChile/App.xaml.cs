@@ -23,6 +23,8 @@ namespace BencinaChile
         /// Settings helper
         /// </summary>
         public AppSettings Settings { get; private set; }
+        
+        public PushHelper PushHelper { get; private set; }
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -80,6 +82,11 @@ namespace BencinaChile
         {
             // Initialize the settings
             Settings = new AppSettings();
+
+            // Push Helper
+            PushHelper = new PushHelper();
+
+            PushHelper.RegisterPushNotifications();
         }
 
         // Code to execute when the application is activated (brought to foreground)

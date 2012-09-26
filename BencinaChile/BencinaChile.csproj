@@ -106,6 +106,7 @@
     <Compile Include="Station.cs" />
     <Compile Include="StationVisitiblityConverter.cs" />
     <Compile Include="Utilities\AppSettings.cs" />
+    <Compile Include="Utilities\PushHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

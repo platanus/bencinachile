@@ -122,6 +122,7 @@ namespace BencinaChile
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
             var msg = "";
 
             // Don't do anything if we already have the data
@@ -138,6 +139,16 @@ namespace BencinaChile
             if (gcw == null)
                 gcw = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
 
+            if (NavigationContext.QueryString.ContainsKey("latitude"))
+            {
+                string latitude = NavigationContext.QueryString["latitude"];
+                string longitude = NavigationContext.QueryString["longitude"];
+
+                // Remove the zip code from the query string (important!)
+                MessageBox.Show(latitude + ", " + longitude);
+            }
+
+            
             // Start the GPS
             gcw.Start();
 
@@ -350,6 +361,14 @@ namespace BencinaChile
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
+        }
+
+        private void ApplicationBarIconPin_Click(object sender, EventArgs e)
+        {
+            ShellTile.Create(new Uri("/MainPage.xaml?latitude=-73.43554&longitude=30.54353&gas_type=g95", UriKind.Relative), new StandardTileData()
+            {
+                Title = "Prueba"
+            });
         }
 
     }
