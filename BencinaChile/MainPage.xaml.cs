@@ -12,7 +12,6 @@ using System.Windows.Shapes;
 using System.Windows.Data;
 using System.Device.Location;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Reactive;
 using Microsoft.Phone.Tasks;
 using Microsoft.Phone.Controls.Maps;
 using Microsoft.Phone.Shell;
