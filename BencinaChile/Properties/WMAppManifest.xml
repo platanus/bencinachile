@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{bfda0cbb-d9d3-4628-b3d2-526eedee4280}" Title="Bencina Chile" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="BencinaChile author" Description="Sample description" Publisher="BencinaChile">
+  <App xmlns="" ProductID="{bfda0cbb-d9d3-4628-b3d2-526eedee4280}" Title="Bencina Chile" RuntimeType="Silverlight" Version="1.0.1.0" Genre="apps.normal" Author="BencinaChile author" Description="Sample description" Publisher="BencinaChile">
     <IconPath IsRelative="true" IsResource="false">Icons\Application_IconImage_62x62.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES" />
