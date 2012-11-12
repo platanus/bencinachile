@@ -107,7 +107,7 @@ namespace BencinaChile.Utilities
         {
             //App.Current.Couch.RegisterPushKey(e.ChannelUri);
             // Save e.ChannelUri
-            var url = "http://192.168.10.102:3500/api/windows_notification?developer_key=1";
+            var url = "http://192.168.50.2:3500/api/windows_notification?developer_key=1";
 
             WebClient webClient = new WebClient();
             webClient.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
