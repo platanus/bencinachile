@@ -351,6 +351,12 @@ namespace BencinaChile
             NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
+        private void tap_map(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MapPage.xaml", UriKind.Relative));   
+            
+        }
+
     }
 
 
